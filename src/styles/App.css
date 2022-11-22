@@ -1,21 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Sen&display=swap');
+
+:root {
+  --headerFont: 'Poppins', sans-serif;
+  --eleGap: 15px;
+  --borderLine: 1px solid black;
+  --dateFont: 'Sen', sans-serif;
+  --dateColor: #6ee7b7;
+}
+
+html, body {
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  overflow-x: hidden; 
+  background-color: gray;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+
 .App {
   display: flex;
-  background-color: gray;
-  height: 100vh;
+  
+  height: 100%;
   padding: 5vh;
   justify-content: center;
   
+}
+
+.avatarDiv {
+  display: flex;
+  width: 200px;
+  height:200px;
+  border-radius: 50%;
+}
+
+.avatar {
+  width: 200px;
+  height:200px;
+  border-radius: 50%;
+}
+
+.avatarDiv:hover {
+  box-shadow: 0 0 3px 1px rgba(10, 10, 10, 0.5);
 }
 
 .formContainer {
   display: flex;
   border: 1px solid white;
   background-color: white;
-  width: 80vh;
+  width: 100vh;
   height: 100vh;
   border-radius: 8px;
   
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+  padding:40px;
+  flex-direction: column;
+  gap:10px;
   
 }
 
@@ -29,4 +74,52 @@
   font-size: 2rem;
   font-weight: bold;
   align-self: center;
+}
+
+.sectionTitle {
+  font-size: 1rem;
+}
+
+#profileContainer {
+  
+}
+
+.formEle {
+  display: grid;
+  gap: var(--eleGap);
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 2fr;
+}
+
+#profileDiv {
+  
+}
+
+#profileName {
+  font-size: 2rem;
+}
+
+.headers {
+  font-family: var(--headerFont);
+  font-weight: bold;
+}
+
+.borderLine {
+  border-bottom: var(--borderLine);
+}
+
+.topBorderLine {
+  border-top: var(--borderLine);
+}
+
+.credentials {
+  display: flex;
+  gap: 10px;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+.dates {
+  font-family: var(--dateFont);
+  color: var(--dateColor)
 }

@@ -1,11 +1,13 @@
-import { Form } from './components/Form';
+import { Education } from './components/Education';
+import { Profile } from './components/Profile';
 import './styles/App.css';
 
 function App() {
   return (
     <div className="App">
       <div className='formContainer'>
-          <Form/>
+          <Profile />
+          <Education />
       </div>
     </div>
   );
