@@ -45,7 +45,7 @@ class Education extends Component {
                         <div className="credRight">
                             <p className="companyTitle">ABC university</p>
                             <p className="locationTxt">Toronto,ON</p>
-                            <p>GPA</p>
+                            <p className="description">GPA</p>
                         </div>
 
                     </div>

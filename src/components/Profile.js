@@ -18,7 +18,12 @@ class Profile extends Component {
         return (
             <div id="profileContainer" className="formEle">
                 <div className="avatarDiv">
-                    <img className="avatar" src={defaultAvatar} alt="avatar" onClick={this.renderProfileAvatar}></img>
+                    <form>
+                        <label className="label">
+                    <input type="file" accept="image/*" onClick={this.renderProfileAvatar}></input>
+                    <img src={defaultAvatar} alt="avatar" className="avatar"></img>
+                    </label>
+                    </form>
                 </div>
                 <div id="profileDiv">
                     <p id="profileName" className="headers">Your Name</p>
