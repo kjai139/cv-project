@@ -16,7 +16,38 @@ class Education extends Component {
     render() {
         return (
             <div id="educationContainer" className="formEle">
-                <div id="educationLeftDiv">
+                <div id="educationLeftDiv" className="btnShell">
+                <button className="editBtn">Edit</button>
+                    <div className="editFormDiv">
+                        <form id="addressForm" name="addressForm" className="editForm" autoComplete="off">
+                            <label>
+                                Address:
+                                <input type="text" name="addressName"></input>
+                            </label>
+                            <label>
+                                City,State,Zip
+                                <input type="text" name="cityStateZip"></input>
+                            </label>
+                            <label>
+                                Phone:
+                                <input type="tel" name="phoneNumber"></input>
+                            </label>
+                            <label>
+                                Email:
+                                <input type="email" name="email"></input>
+                            </label>
+                            <label>
+                                Website:
+                                <input type="text" name="website"></input>
+                            </label>
+                            <div className="submitBtnDiv">
+                                <button className="submitBtn">CANCEL</button>
+                                <button className="submitBtn">
+                                    OK
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                     <p className="headers sectionTitle">ADDRESS</p>
                     <p>123 fake street</p>
                     <p>City, state, zip</p>
@@ -33,7 +64,38 @@ class Education extends Component {
 
 
                 </div>
-                <div id="educationRightDiv">
+                <div id="educationRightDiv" className="btnShell">
+                <button className="addBtn">Add</button>
+                    <div className="editFormDiv">
+                        <form id="educationForm" name="educationForm" className="editForm" autoComplete="off">
+                            <label>
+                                School name:
+                                <input type="text" name="schoolName"></input>
+                            </label>
+                            <label>
+                                Location:
+                                <input type="text" name="location"></input>
+                            </label>
+                            <label>
+                                Start date:
+                                <input type="month" name="startDate"></input>
+                            </label>
+                            <label>
+                                End date:
+                                <input type="month" name="endDate"></input>
+                            </label>
+                            <label>
+                                GPA:
+                                <input type="text" name="gpa"/>
+                            </label>
+                            <div className="submitBtnDiv">
+                                <button className="submitBtn">CANCEL</button>
+                                <button className="submitBtn">
+                                    OK
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                     <div className="topBorderLine"></div>
                     <p className="headers">Education</p>
                     <div className="borderLine"></div>

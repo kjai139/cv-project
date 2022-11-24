@@ -14,7 +14,23 @@ class Experience extends Component {
     render() {
         return (
             <div id="experienceContainer" className="formEle">
-                <div id="experienceLeft">
+                <div id="experienceLeft" className="btnShell">
+                <button className="addBtn">Add</button>
+                    <div className="editFormDiv">
+                        <form id="skillsForm" name="skillsForm" className="editForm" autoComplete="off">
+                            <label>
+                                Skill:
+                                <input type="text" name="skillName"></input>
+                            </label>
+                            <div className="submitBtnDiv">
+                                <button className="submitBtn">CANCEL</button>
+                                <button className="submitBtn">
+                                    OK
+                                </button>
+                            </div>
+                            
+                        </form>
+                    </div>
                     <div className="topBorderLine"></div>
                     <p className="headers sectionTitle">Skills</p>
                     <div className="borderLine"></div>
@@ -31,7 +47,42 @@ class Experience extends Component {
                     </ul>
 
                 </div>
-                <div id="experienceRight">
+                <div id="experienceRight" className="btnShell">
+                <button className="addBtn">Add</button>
+                    <div className="editFormDiv">
+                        <form id="experienceForm" name="experienceForm" className="editForm" autoComplete="off">
+                            <label>
+                                Company:
+                                <input type="text" name="companyName"></input>
+                            </label>
+                            <label>
+                                Title:
+                                <input type="text" name="title"></input>
+                            </label>
+                            <label>
+                                Start Date:
+                                <input type="month" name="startDate"></input>
+                            </label>
+                            <label>
+                                End Date:
+                                <input type="month" name="endDate"></input>
+                            </label>
+                            <label>
+                                Location:
+                                <input type="text" name="location"></input>
+                            </label>
+                            <label>
+                                Description:
+                                <textarea name="description"></textarea>
+                            </label>
+                            <div className="submitBtnDiv">
+                                <button className="submitBtn">CANCEL</button>
+                                <button className="submitBtn">
+                                    OK
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                     <div className="topBorderLine"></div>
                     <p className="headers">Experience</p>
                     <div className="borderLine"></div>

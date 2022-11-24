@@ -25,7 +25,30 @@ class Profile extends Component {
                     </label>
                     </form>
                 </div>
-                <div id="profileDiv">
+                <div id="profileDiv" className="btnShell">
+                    <button className="editBtn">Edit</button>
+                    <div className="editFormDiv">
+                        <form id="profileForm" name="profileForm" className="editForm" autoComplete="off">
+                            <label>
+                                Name:
+                                <input type="text" name="name"></input>
+                            </label>
+                            <label>
+                                Title:
+                                <input type="text" name="title"></input>
+                            </label>
+                            <label>
+                                Profile:
+                                <textarea name="profile"/>
+                            </label>
+                            <div className="submitBtnDiv">
+                                <button className="submitBtn">CANCEL</button>
+                                <button className="submitBtn">
+                                    OK
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                     <p id="profileName" className="headers">Your Name</p>
                     <p id="profileTitle">Your title</p>
                     <p id="profileHeader" className="headers sectionTitle">Profile</p>
