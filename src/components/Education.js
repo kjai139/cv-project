@@ -4,9 +4,33 @@ import React, { Component } from "react";
 class Education extends Component {
     constructor(props){
         super(props)
+
+        this.state = {
+            address: '123 Fake Street',
+            cityStateZip: 'Toronto ON L2W 3V7',
+            phone: '666-666-6666',
+            email: 'info@website.com',
+            online: 'yourwebsite.com',
+            education: []
+
+        }
+
+        this.handleChange = this.handleChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
+    handleChange(e) {
+        this.setState({[e.target.name] : e.target.value})
+    }
 
+    handleSubmit(e) {
+        e.preventDefault()
+
+        console.log('submitted')
+        console.log(this.state)
+
+        
+    }
 
 
 
@@ -22,44 +46,44 @@ class Education extends Component {
                         <form id="addressForm" name="addressForm" className="editForm" autoComplete="off">
                             <label>
                                 Address:
-                                <input type="text" name="addressName"></input>
+                                <input type="text" name="address" onChange={this.handleChange}></input>
                             </label>
                             <label>
                                 City,State,Zip
-                                <input type="text" name="cityStateZip"></input>
+                                <input type="text" name="cityStateZip" onChange={this.handleChange}></input>
                             </label>
                             <label>
                                 Phone:
-                                <input type="tel" name="phoneNumber"></input>
+                                <input type="tel" name="phone" onChange={this.handleChange}></input>
                             </label>
                             <label>
                                 Email:
-                                <input type="email" name="email"></input>
+                                <input type="email" name="email" onChange={this.handleChange}></input>
                             </label>
                             <label>
                                 Website:
-                                <input type="text" name="website"></input>
+                                <input type="text" name="online" onChange={this.handleChange}></input>
                             </label>
                             <div className="submitBtnDiv">
                                 <button className="submitBtn">CANCEL</button>
-                                <button className="submitBtn">
+                                <button className="submitBtn" onClick={this.handleSubmit}>
                                     OK
                                 </button>
                             </div>
                         </form>
                     </div>
                     <p className="headers sectionTitle">ADDRESS</p>
-                    <p>123 fake street</p>
-                    <p>City, state, zip</p>
+                    <p>{this.state.address}</p>
+                    <p>{this.state.cityStateZip}</p>
                     <div className="borderLine"></div>
                     <p className="headers sectionTitle">PHONE</p>
-                    <p>666-666-6666</p>
+                    <p>{this.state.phone}</p>
                     <div className="borderLine"></div>
                     <p className="headers sectionTitle">EMAIL</p>
-                    <p>info@website.com</p>
+                    <p>{this.state.email}</p>
                     <div className="borderLine"></div>
                     <p className="headers sectionTitle">ONLINE</p>
-                    <p>yourwebsite.com</p>
+                    <p>{this.state.online}</p>
                     
 
 

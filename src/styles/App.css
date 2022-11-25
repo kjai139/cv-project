@@ -164,6 +164,7 @@ input, textarea {
 }
 
 .editFormDiv {
+  z-index: 9999;
   background-color: var(--formBG);
   position: absolute;
   right: 0;
@@ -180,6 +181,10 @@ input, textarea {
   gap:5px;
 }
 
+#profileTxt {
+  max-width: 50ch;
+  overflow-wrap: anywhere;
+}
 
 #profileName {
   font-size: 2rem;
@@ -242,4 +247,8 @@ input, textarea {
 
 .avatarDiv input[type='file'] {
   display:none
+}
+
+p {
+  overflow-wrap:anywhere;
 }
