@@ -177,7 +177,7 @@ input, textarea {
 .editForm {
   flex-direction: column;
   display: flex;
-  align-items: end;
+  align-items: flex-end;
   gap:5px;
 }
 
@@ -208,7 +208,57 @@ input, textarea {
   gap: 10px;
   justify-content: space-around;
   padding: 10px;
+
+  position: relative;
 }
+
+.credentials:hover .removeBtn {
+  opacity: 100%;
+}
+
+.skillList {
+  position: relative;
+}
+
+.skillList:hover{
+  background-color: rgba(221, 217, 217, 0.644);
+}
+
+.skillList:hover .listRemoveBtn{
+  opacity: 100%;
+}
+
+.listRemoveBtn {
+  background:url('/src/components/imgs/cancel-btn.svg');
+  width: 14px;
+  height: 14px;
+  position: absolute;
+  top:0px;
+  right:0;
+  border: 0;
+  opacity:0;
+}
+
+
+.removeBtn {
+  
+  opacity: 0;
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  right:10px;
+  top:10px;
+  border: 0;
+  
+  
+  background:url('/src/components/imgs/cancel-btn.svg');
+}
+.removeBtn:hover, .listRemoveBtn:hover {
+  transform: scale(120%);
+  cursor: pointer;
+}
+
+
 
 .credLeft, .credRight {
   display: flex;
