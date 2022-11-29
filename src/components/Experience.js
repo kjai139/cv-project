@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import format from "date-fns/format";
-import cBtn from './imgs/cancel-btn.svg'
+
 
 
 class Experience extends Component {
@@ -48,6 +48,7 @@ class Experience extends Component {
         this.setState({skills:[...this.state.skills, skillName]})
 
         e.target.reset()
+        e.target.parentNode.classList.add('hidden')
     }
 
     handleChangeExperiences(e) {
@@ -70,6 +71,35 @@ class Experience extends Component {
         this.setState({credentials:[...this.state.credentials, obj]})
 
         e.target.reset()
+        e.target.parentNode.classList.add('hidden')
+    }
+
+    displayExperienceForm() {
+        let experienceForm = document.querySelector('#experienceForm').parentNode
+
+        let form = document.querySelector('#experienceForm')
+
+        if (experienceForm.classList.contains('hidden')){
+            experienceForm.classList.remove('hidden')
+        } else {
+            form.reset()
+            experienceForm.classList.add('hidden')
+            
+        }
+        
+    }
+
+    displaySkillsForm() {
+        let skillForm = document.querySelector('#skillsForm').parentNode
+
+        let form = document.querySelector('#skillsForm')
+
+        if (skillForm.classList.contains('hidden')){
+            skillForm.classList.remove('hidden')
+        } else {
+            form.reset()
+            skillForm.classList.add('hidden')
+        }
     }
 
     renderSkills() {
@@ -124,6 +154,18 @@ class Experience extends Component {
 
     }
 
+    cancelBtn(e) {
+        let form = document.querySelector('#experienceForm')
+        form.reset()
+        form.parentNode.classList.add('hidden')
+    }
+
+    cancelSkillBtn(e) {
+        let form = document.querySelector('#skillsForm')
+        form.reset()
+        form.parentNode.classList.add('hidden')
+    }
+
 
 
 
@@ -131,15 +173,15 @@ class Experience extends Component {
         return (
             <div id="experienceContainer" className="formEle">
                 <div id="experienceLeft" className="btnShell">
-                <button className="addBtn">Add</button>
-                    <div className="editFormDiv">
+                <button className="addBtn" onClick={this.displaySkillsForm}>Add</button>
+                    <div className="editFormDiv hidden">
                         <form id="skillsForm" name="skillsForm" className="editForm" autoComplete="off" onSubmit={this.handleChangeSkills}>
                             <label>
                                 Skill:
                                 <input type="text" name="skillName"></input>
                             </label>
                             <div className="submitBtnDiv">
-                                <button className="submitBtn">CANCEL</button>
+                                <button className="submitBtn" type="button" onClick={this.cancelSkillBtn}>CANCEL</button>
                                 <button className="submitBtn" >
                                     OK
                                 </button>
@@ -157,8 +199,8 @@ class Experience extends Component {
 
                 </div>
                 <div id="experienceRight" className="btnShell">
-                <button className="addBtn">Add</button>
-                    <div className="editFormDiv">
+                <button className="addBtn" onClick={this.displayExperienceForm}>Add</button>
+                    <div className="editFormDiv hidden">
                         <form id="experienceForm" name="experienceForm" className="editForm" autoComplete="off" onSubmit={this.handleChangeExperiences}>
                             <label>
                                 Company:
@@ -185,7 +227,7 @@ class Experience extends Component {
                                 <textarea name="description"></textarea>
                             </label>
                             <div className="submitBtnDiv">
-                                <button className="submitBtn">CANCEL</button>
+                                <button type="button" className="submitBtn" onClick={this.cancelBtn}>CANCEL</button>
                                 <button className="submitBtn">
                                     OK
                                 </button>

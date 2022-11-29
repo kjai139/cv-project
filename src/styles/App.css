@@ -37,6 +37,12 @@ html, body {
   
 }
 
+.hidden {
+  visibility: hidden;
+}
+
+
+
 .avatarDiv {
   display: flex;
   width: 200px;
@@ -93,9 +99,7 @@ html, body {
   grid-template-columns: 1fr 2fr;
 }
 
-#profileDiv {
-  
-}
+
 
 .btnShell {
   position: relative;
@@ -111,6 +115,7 @@ html, body {
   border-radius: 4px;
   
   font-family: var(--credTitle);
+  visibility: hidden;
   
 
 }
@@ -133,12 +138,25 @@ html, body {
 
 .submitBtn:hover{
   
+  filter: brightness(50%);
+  
+  
+}
+
+.submitBtn:active{
+  
   filter: brightness(90%);
   transform: scale(90%);
   
 }
 
 .editBtn:hover, .addBtn:hover{
+  cursor: pointer;
+  filter: brightness(50%);
+  
+}
+
+.editBtn:active, .addBtn:active{
   cursor: pointer;
   filter: brightness(90%);
   transform: scale(95%);
@@ -170,6 +188,7 @@ input, textarea {
   right: 0;
   padding: 10px;
   top: 30px;
+  
   
   border-radius: 15px;
   box-shadow: rgba(196, 182, 182, 0.644) 0px 5px 15px;
@@ -214,6 +233,12 @@ input, textarea {
 
 .credentials:hover .removeBtn {
   opacity: 100%;
+}
+
+
+
+#profileDiv:hover .editBtn, #educationLeftDiv:hover .editBtn, #educationRightDiv:hover .addBtn, #experienceLeft:hover .addBtn, #experienceRight:hover .addBtn {
+  visibility: visible;
 }
 
 .skillList {
