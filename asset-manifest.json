@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/cv-project/static/css/main.8c8ce650.css",
+    "main.js": "/cv-project/static/js/main.ba22db90.js",
+    "static/js/787.34a20539.chunk.js": "/cv-project/static/js/787.34a20539.chunk.js",
+    "static/media/cancel-btn.svg": "/cv-project/static/media/cancel-btn.2118a0a4be3b42ca4626.svg",
+    "index.html": "/cv-project/index.html",
+    "static/media/default-avatar.svg": "/cv-project/static/media/default-avatar.09187e8f10599a1a473c71aaf8a053e0.svg",
+    "main.8c8ce650.css.map": "/cv-project/static/css/main.8c8ce650.css.map",
+    "main.ba22db90.js.map": "/cv-project/static/js/main.ba22db90.js.map",
+    "787.34a20539.chunk.js.map": "/cv-project/static/js/787.34a20539.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8c8ce650.css",
+    "static/js/main.ba22db90.js"
+  ]
+}
