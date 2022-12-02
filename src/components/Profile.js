@@ -1,45 +1,42 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import defaultAvatar from './imgs/default-avatar.svg'
 
-class Profile extends Component {
-    constructor(props){
-        super(props)
-        this.state = {
-            imageSrc:defaultAvatar, 
-            name:'Your Name', 
-            title:'Your title', 
-            profile:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam nunc ex, pharetra quis urna et, tincidunt gravida ante. Proin vel ex eget massa convallis tincidunt. Vestibulum vulputate vehicula mi, nec pellentesque sapien lacinia ac. Donec ac lectus rhoncus magna tincidunt finibus et quis eros. Nam lacus diam, feugiat eget nisl eleifend, malesuada ultrices nibh. Fusce dignissim justo in quam congue ultricies. Proin rutrum laoreet justo id mollis. Aliquam erat volutpat. Praesent ex arcu, tristique at sollicitudin vitae, cursus sit amet lorem.' 
-        }
+function Profile() {
 
-        this.renderProfileAvatar = this.renderProfileAvatar.bind(this)
+    const [imageSrc, setImageSrc] = useState(defaultAvatar)
+    const [formValue, setFormValue] = useState({
+        name:'Your Name', 
+        title:'Your title', 
+        profile:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam nunc ex, pharetra quis urna et, tincidunt gravida ante. Proin vel ex eget massa convallis tincidunt. Vestibulum vulputate vehicula mi, nec pellentesque sapien lacinia ac. Donec ac lectus rhoncus magna tincidunt finibus et quis eros. Nam lacus diam, feugiat eget nisl eleifend, malesuada ultrices nibh. Fusce dignissim justo in quam congue ultricies. Proin rutrum laoreet justo id mollis. Aliquam erat volutpat. Praesent ex arcu, tristique at sollicitudin vitae, cursus sit amet lorem.' 
+    })
 
-        
-        this.handleChange = this.handleChange.bind(this)
-
-    }
-
-    renderProfileAvatar(e) {
+    const renderProfileAvatar = (e) => {
         let [file] = e.target.files
         if (file) {
-            this.setState({imageSrc:(URL.createObjectURL(file))})
+            setImageSrc((URL.createObjectURL(file)))
         }
     }
 
-    handleChange(e) {
-        this.setState({[e.target.name]: e.target.value})
-        console.log(e.target.name)
-
+    const handleChange = (e) => {
+        const {name, value} = e.target
+        
+        setFormValue( (prevState) => {
+            return {
+                ...prevState,
+                [name]: value,
+            }
+        })
         e.target.style.height = ''
         e.target.style.height = e.target.scrollHeight + 'px'
     }
 
-    closeProfileBtn (e) {
+    const closeProfileBtn =  (e) => {
         
         let form = document.querySelector('#profileForm')
         form.parentNode.classList.add('hidden')
     }
 
-    displayProfileForm(e) {
+    const displayProfileForm = (e) => {
         let profileForm = document.querySelector('#profileForm').parentNode
 
         
@@ -53,47 +50,46 @@ class Profile extends Component {
         }
     }
 
-   
 
-    render() {
-        return (
-            <div id="profileContainer" className="formEle">
+
+    return (
+        <div id="profileContainer" className="formEle">
                 <div className="avatarDiv">
                     <form>
                         <label className="label">
-                    <input type="file" accept="image/*" name="avatar" onChange={this.renderProfileAvatar}></input>
-                    <img src={this.state.imageSrc} alt="avatar" className="avatar"></img>
+                    <input type="file" accept="image/*" name="avatar" onChange={renderProfileAvatar}></input>
+                    <img src={imageSrc} alt="avatar" className="avatar"></img>
                     </label>
                     </form>
                 </div>
                 <div id="profileDiv" className="btnShell">
-                    <button className="editBtn" onClick={this.displayProfileForm}>Edit</button>
+                    <button className="editBtn" onClick={displayProfileForm}>Edit</button>
                     <div className="editFormDiv hidden">
                         <form id="profileForm" name="profileForm" className="editForm" autoComplete="off">
                             <label>
                                 Name:
-                                <input type="text" name="name" onChange={this.handleChange} maxLength="20"></input>
+                                <input type="text" name="name" onChange={handleChange} maxLength="20"></input>
                             </label>
                             <label>
                                 Title:
-                                <input type="text" name="title" onChange={this.handleChange}></input>
+                                <input type="text" name="title" onChange={handleChange}></input>
                             </label>
                             <label>
                                 Profile:
-                                <textarea name="profile" onChange={this.handleChange}/>
+                                <textarea name="profile" onChange={handleChange}/>
                             </label>
                             <div className="submitBtnDiv">
-                                <button className="submitBtn" type="button" onClick={this.closeProfileBtn}>CLOSE</button>
+                                <button className="submitBtn" type="button" onClick={closeProfileBtn}>CLOSE</button>
                                 
                                     
                                
                             </div>
                         </form>
                     </div>
-                    <p id="profileName" className="headers" >{this.state.name}</p>
-                    <p id="profileTitle">{this.state.title}</p>
+                    <p id="profileName" className="headers" >{formValue.name}</p>
+                    <p id="profileTitle">{formValue.title}</p>
                     <p id="profileHeader" className="headers sectionTitle">Profile</p>
-                    <p id="profileTxt">{this.state.profile} 
+                    <p id="profileTxt">{formValue.profile} 
                     </p>
                 </div>
                 
@@ -101,9 +97,8 @@ class Profile extends Component {
 
 
             </div>
-        )
-    }
-}
+    )
 
+}
 
 export {Profile}

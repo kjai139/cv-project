@@ -1,57 +1,53 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import format from "date-fns/format";
 
 
+function Experience() {
+    const [formValue, setFormValue] = useState({
+        skills:['Creative thinking', 'Communication', 'Listening', 'Detailed-Oriented', 'Time Management', 'Problem Solving', 'Artistic Eye', 'Adaptability'],
 
-class Experience extends Component {
-    constructor(prop){
-        super(prop)
-        this.state = {
-            skills:['Creative thinking', 'Communication', 'Listening', 'Detailed-Oriented', 'Time Management', 'Problem Solving', 'Artistic Eye', 'Adaptability'],
-
-            credentials:[
-                {
-                    startDate: 'Jan 2019',
-                    endDate: 'Oct 2020',
-                    credTitle: 'Senior Web Developer',
-                    companyTitle: 'Abc Corporation',
-                    location: 'Toronto, ON',
-                    jobDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam nunc ex, pharetra quis urna et, tincidunt gravida ante.'
+        credentials:[
+            {
+                startDate: 'Jan 2019',
+                endDate: 'Oct 2020',
+                credTitle: 'Senior Web Developer',
+                companyTitle: 'Abc Corporation',
+                location: 'Toronto, ON',
+                jobDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam nunc ex, pharetra quis urna et, tincidunt gravida ante.'
 
 
 
-                },
-                {
-                    startDate: 'Jan 2018',
-                    endDate: 'Dec 2018',
-                    credTitle: 'Junior Web Developer',
-                    companyTitle: 'Abc Corporation',
-                    location: 'Toronto, ON',
-                    jobDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam nunc ex, pharetra quis urna et, tincidunt gravida ante.'
-                }
-            ]
-        }
+            },
+            {
+                startDate: 'Jan 2018',
+                endDate: 'Dec 2018',
+                credTitle: 'Junior Web Developer',
+                companyTitle: 'Abc Corporation',
+                location: 'Toronto, ON',
+                jobDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam nunc ex, pharetra quis urna et, tincidunt gravida ante.'
+            }
+        ]
+    })
 
-        this.handleChangeSkills = this.handleChangeSkills.bind(this)
-        this.renderSkills = this.renderSkills.bind(this)
-        this.handleChangeExperiences = this.handleChangeExperiences.bind(this)
-        this.renderExperiences = this.renderExperiences.bind(this)
-
-        this.removeSkills = this.removeSkills.bind(this)
-        this.removeExperience = this.removeExperience.bind(this)
-    }
-
-    handleChangeSkills(e){
+    const handleChangeSkills =(e) => {
         e.preventDefault()
         let data = new FormData(e.target)
         let skillName =  data.get('skillName')
-        this.setState({skills:[...this.state.skills, skillName]})
+
+        setFormValue( (prevState) => {
+            return {
+                ...prevState,
+                skills: [...formValue.skills, skillName]
+            }
+        })
+
+        
 
         e.target.reset()
         e.target.parentNode.classList.add('hidden')
     }
 
-    handleChangeExperiences(e) {
+    const handleChangeExperiences = (e) => {
         e.preventDefault()
         let data = new FormData(e.target)
         let formatStart = format(new Date(`${data.get('startDate')}`.replace(/-/g, '\/').replace(/T.+/, '')),'MMM yyyy')
@@ -68,13 +64,19 @@ class Experience extends Component {
             jobDescription: data.get('description')
         }
         
-        this.setState({credentials:[...this.state.credentials, obj]})
+        setFormValue( (prevState) => {
+            return {
+                ...prevState,
+                credentials:[...formValue.credentials, obj]
+            }
+        })
+        
 
         e.target.reset()
         e.target.parentNode.classList.add('hidden')
     }
 
-    displayExperienceForm() {
+    const displayExperienceForm = () => {
         let experienceForm = document.querySelector('#experienceForm').parentNode
 
         let form = document.querySelector('#experienceForm')
@@ -89,7 +91,7 @@ class Experience extends Component {
         
     }
 
-    displaySkillsForm() {
+    const displaySkillsForm = () => {
         let skillForm = document.querySelector('#skillsForm').parentNode
 
         let form = document.querySelector('#skillsForm')
@@ -102,17 +104,17 @@ class Experience extends Component {
         }
     }
 
-    renderSkills() {
-        return this.state.skills.map((value, key) => 
+    const renderSkills = () => {
+        return formValue.skills.map((value, key) => 
             
-            <li key={`skills-key-${key}`} id={`skill-${key}`} className="skillList">{value}<button className="listRemoveBtn" value={value} onClick={this.removeSkills}></button></li>
+            <li key={`skills-key-${key}`} id={`skill-${key}`} className="skillList">{value}<button className="listRemoveBtn" value={value} onClick={removeSkills}></button></li>
         
         
         )
     }
 
-    renderExperiences() {
-        return this.state.credentials.map((value, key) =>
+    const renderExperiences = () => {
+        return formValue.credentials.map((value, key) =>
 
         <div className="credentials" key={`exp${key}`} id={`credentials-${key}`}>
             <div className="credLeft">
@@ -124,7 +126,7 @@ class Experience extends Component {
                 <p className="locationTxt">{value.location}</p>
                 <p className="description">{value.jobDescription}</p>
             </div>
-            <button value={key} className="removeBtn" onClick={this.removeExperience}>
+            <button value={key} className="removeBtn" onClick={removeExperience}>
                 
             </button>
         </div>
@@ -132,56 +134,65 @@ class Experience extends Component {
         
     }
 
-    removeSkills(e) {
+    const removeSkills =(e) => {
         
-        let arr = this.state.skills
-        let index = this.state.skills.indexOf(e.target.value)
+        let arr = formValue.skills
+        let index = formValue.skills.indexOf(e.target.value)
         // console.log('remove', index, e.target.value)
         let newArr = arr.filter((ele, eleIndex) => eleIndex !== index)
         // console.log(newArr)
 
-        this.setState({skills: newArr})
+        setFormValue((prevState) => {
+            return {
+                ...prevState,
+                skills: newArr
+            }
+        })
+
+        
     }
 
-    removeExperience(e){
-        let arr = this.state.credentials
+    const removeExperience = (e) => {
+        let arr = formValue.credentials
         let index = Number(e.target.value)
 
         let newArr = arr.filter((ele, eleIndex) => eleIndex !== index)
 
-        this.setState({credentials: newArr})
+        setFormValue( (prevState) => {
+            return {
+                ...prevState,
+                credentials: newArr
+            }
+        })
+        
 
 
     }
 
-    cancelBtn(e) {
+    const cancelBtn = (e) => {
         let form = document.querySelector('#experienceForm')
         form.reset()
         form.parentNode.classList.add('hidden')
     }
 
-    cancelSkillBtn(e) {
+    const cancelSkillBtn = (e) => {
         let form = document.querySelector('#skillsForm')
         form.reset()
         form.parentNode.classList.add('hidden')
     }
 
-
-
-
-    render() {
-        return (
-            <div id="experienceContainer" className="formEle">
+    return (
+        <div id="experienceContainer" className="formEle">
                 <div id="experienceLeft" className="btnShell">
-                <button className="addBtn" onClick={this.displaySkillsForm}>Add</button>
+                <button className="addBtn" onClick={displaySkillsForm}>Add</button>
                     <div className="editFormDiv hidden">
-                        <form id="skillsForm" name="skillsForm" className="editForm" autoComplete="off" onSubmit={this.handleChangeSkills}>
+                        <form id="skillsForm" name="skillsForm" className="editForm" autoComplete="off" onSubmit={handleChangeSkills}>
                             <label>
                                 Skill:
                                 <input type="text" name="skillName"></input>
                             </label>
                             <div className="submitBtnDiv">
-                                <button className="submitBtn" type="button" onClick={this.cancelSkillBtn}>CANCEL</button>
+                                <button className="submitBtn" type="button" onClick={cancelSkillBtn}>CANCEL</button>
                                 <button className="submitBtn" >
                                     OK
                                 </button>
@@ -193,15 +204,15 @@ class Experience extends Component {
                     <p className="headers sectionTitle">Skills</p>
                     <div className="borderLine"></div>
                     <ul id="skillList">
-                        {this.renderSkills()}
+                        {renderSkills()}
                         
                     </ul>
 
                 </div>
                 <div id="experienceRight" className="btnShell">
-                <button className="addBtn" onClick={this.displayExperienceForm}>Add</button>
+                <button className="addBtn" onClick={displayExperienceForm}>Add</button>
                     <div className="editFormDiv hidden">
-                        <form id="experienceForm" name="experienceForm" className="editForm" autoComplete="off" onSubmit={this.handleChangeExperiences}>
+                        <form id="experienceForm" name="experienceForm" className="editForm" autoComplete="off" onSubmit={handleChangeExperiences}>
                             <label>
                                 Company:
                                 <input type="text" name="companyName"></input>
@@ -227,7 +238,7 @@ class Experience extends Component {
                                 <textarea name="description"></textarea>
                             </label>
                             <div className="submitBtnDiv">
-                                <button type="button" className="submitBtn" onClick={this.cancelBtn}>CANCEL</button>
+                                <button type="button" className="submitBtn" onClick={cancelBtn}>CANCEL</button>
                                 <button className="submitBtn">
                                     OK
                                 </button>
@@ -237,14 +248,14 @@ class Experience extends Component {
                     <div className="topBorderLine"></div>
                     <p className="headers">Experience</p>
                     <div className="borderLine"></div>
-                    {this.renderExperiences()}
+                    {renderExperiences()}
                     
 
                 </div>
 
             </div>
-        )
-    }
+    )
+
 }
 
 

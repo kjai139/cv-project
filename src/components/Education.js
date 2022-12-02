@@ -1,56 +1,46 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import format from "date-fns/format";
 
-
-class Education extends Component {
-    constructor(props){
-        super(props)
-
-        this.state = {
-            address: '123 Fake Street',
-            cityStateZip: 'Toronto ON L2W 3V7',
-            phone: '666-666-6666',
-            email: 'info@website.com',
-            online: 'yourwebsite.com',
-            education: [
-                {
-                    schoolName: 'ABC university',
-                    programName: 'B.S Web Development',
-                    location: 'Toronto ON',
-                    startDate: 'Aug 2019',
-                    endDate: 'Dec 2020',
-                    gpa: '3.5',
+function Education() {
+    const [formValue, setFormValue] = useState({
+        address: '123 Fake Street',
+        cityStateZip: 'Toronto ON L2W 3V7',
+        phone: '666-666-6666',
+        email: 'info@website.com',
+        online: 'yourwebsite.com',
+        education: [
+            {
+                schoolName: 'ABC university',
+                programName: 'B.S Web Development',
+                location: 'Toronto ON',
+                startDate: 'Aug 2019',
+                endDate: 'Dec 2020',
+                gpa: '3.5',
 
 
-                },
-                {
-                    schoolName: 'BCD university',
-                    programName: 'PogChamp Web Development',
-                    location: 'Toronto ON',
-                    startDate: 'Feb 2018',
-                    endDate: 'Dec 2018',
-                    gpa: '3.5',
-                }
-            ]
+            },
+            {
+                schoolName: 'BCD university',
+                programName: 'PogChamp Web Development',
+                location: 'Toronto ON',
+                startDate: 'Feb 2018',
+                endDate: 'Dec 2018',
+                gpa: '3.5',
+            }
+        ]
+    })
 
-        }
-
-        this.handleChange = this.handleChange.bind(this)
-        
-
-        this.renderEducation = this.renderEducation.bind(this)
-        this.submitEducation = this.submitEducation.bind(this)
-        this.removeEducation = this.removeEducation.bind(this)
+    const handleChange = (e) => {
+        const {name, value} = e.target
+        setFormValue( (prevState) => {
+            return {...prevState, 
+                [name] : value
+            }
+        })
     }
 
-    handleChange(e) {
-        this.setState({[e.target.name] : e.target.value})
-    }
-
-    
-
-    renderEducation(e) {
-        return this.state.education.map((value, key) =>
+    const renderEducation = (e) => {
+        return formValue.education.map((value, key) =>
         <div className="credentials" key={`edu-${key}`}>
             <div className="credLeft">
                 <p className="dates">{value.startDate} - {value.endDate}</p>
@@ -61,7 +51,7 @@ class Education extends Component {
                 <p className="locationTxt">{value.location}</p>
                 <p className="description">{value.gpa}</p>
             </div>
-            <button value={key} className="removeBtn" onClick={this.removeEducation}>
+            <button value={key} className="removeBtn" onClick={removeEducation}>
                 
             </button>
 
@@ -69,7 +59,7 @@ class Education extends Component {
         )
     }
 
-    submitEducation(e) {
+    const submitEducation = (e) => {
         e.preventDefault()
         
             
@@ -88,7 +78,12 @@ class Education extends Component {
             gpa: data.get('gpa'),
         }
         
-        this.setState({education:[...this.state.education, obj]})
+        setFormValue((prevState) => {
+            return {
+                ...prevState,
+                education: [...formValue.education, obj]
+            }
+        })
 
         e.target.reset()
         e.target.parentNode.classList.add('hidden')
@@ -96,17 +91,22 @@ class Education extends Component {
 
     }
 
-    removeEducation(e) {
-        let arr = this.state.education
+    const removeEducation = (e) => {
+        let arr = formValue.education
         let index = Number(e.target.value)
 
         let newArr = arr.filter((ele, eleIndex) => eleIndex !== index )
         console.log(newArr)
 
-        this.setState({education: newArr})
+        setFormValue((prevState) => {
+            return {
+                ...prevState,
+                education: newArr
+            }
+        })
     }
 
-    displayEducationForm() {
+    const displayEducationForm = () => {
         let educationForm = document.querySelector('#educationForm').parentNode
 
         let form = document.querySelector('#educationForm')
@@ -121,7 +121,7 @@ class Education extends Component {
         
     }
 
-    displayAddressForm() {
+    const displayAddressForm = () => {
         let addressForm = document.querySelector('#addressForm').parentNode
 
         let form = document.querySelector('#addressForm')
@@ -134,13 +134,13 @@ class Education extends Component {
         }
     }
 
-    cancelBtnAddress(e) {
+    const cancelBtnAddress = (e) => {
         let form = document.querySelector('#addressForm')
         
         form.parentNode.classList.add('hidden')
     }
 
-    cancelBtnEducation(e) {
+    const cancelBtnEducation = (e) => {
         let form = document.querySelector('#educationForm')
         form.reset()
         form.parentNode.classList.add('hidden')
@@ -148,59 +148,58 @@ class Education extends Component {
 
 
 
-    render() {
-        return (
-            <div id="educationContainer" className="formEle">
+    return (
+        <div id="educationContainer" className="formEle">
                 <div id="educationLeftDiv" className="btnShell">
-                <button className="editBtn" onClick={this.displayAddressForm}>Edit</button>
+                <button className="editBtn" onClick={displayAddressForm}>Edit</button>
                     <div className="editFormDiv hidden">
                         <form id="addressForm" name="addressForm" className="editForm" autoComplete="off">
                             <label>
                                 Address:
-                                <input type="text" name="address" onChange={this.handleChange}></input>
+                                <input type="text" name="address" onChange={handleChange}></input>
                             </label>
                             <label>
                                 City,State,Zip
-                                <input type="text" name="cityStateZip" onChange={this.handleChange}></input>
+                                <input type="text" name="cityStateZip" onChange={handleChange}></input>
                             </label>
                             <label>
                                 Phone:
-                                <input type="tel" name="phone" onChange={this.handleChange}></input>
+                                <input type="tel" name="phone" onChange={handleChange}></input>
                             </label>
                             <label>
                                 Email:
-                                <input type="email" name="email" onChange={this.handleChange}></input>
+                                <input type="email" name="email" onChange={handleChange}></input>
                             </label>
                             <label>
                                 Website:
-                                <input type="text" name="online" onChange={this.handleChange}></input>
+                                <input type="text" name="online" onChange={handleChange}></input>
                             </label>
                             <div className="submitBtnDiv">
-                                <button className="submitBtn" type="button" onClick={this.cancelBtnAddress}>CLOSE</button>
+                                <button className="submitBtn" type="button" onClick={cancelBtnAddress}>CLOSE</button>
                                 
                             </div>
                         </form>
                     </div>
                     <p className="headers sectionTitle">ADDRESS</p>
-                    <p>{this.state.address}</p>
-                    <p>{this.state.cityStateZip}</p>
+                    <p>{formValue.address}</p>
+                    <p>{formValue.cityStateZip}</p>
                     <div className="borderLine"></div>
                     <p className="headers sectionTitle">PHONE</p>
-                    <p>{this.state.phone}</p>
+                    <p>{formValue.phone}</p>
                     <div className="borderLine"></div>
                     <p className="headers sectionTitle">EMAIL</p>
-                    <p>{this.state.email}</p>
+                    <p>{formValue.email}</p>
                     <div className="borderLine"></div>
                     <p className="headers sectionTitle">ONLINE</p>
-                    <p>{this.state.online}</p>
+                    <p>{formValue.online}</p>
                     
 
 
                 </div>
                 <div id="educationRightDiv" className="btnShell">
-                <button className="addBtn" onClick={this.displayEducationForm}>Add</button>
+                <button className="addBtn" onClick={displayEducationForm}>Add</button>
                     <div className="editFormDiv hidden">
-                        <form id="educationForm" name="educationForm" className="editForm" autoComplete="off" onSubmit={this.submitEducation}>
+                        <form id="educationForm" name="educationForm" className="editForm" autoComplete="off" onSubmit={submitEducation}>
                             <label>
                                 School name:
                                 <input type="text" name="schoolName"></input>
@@ -226,7 +225,7 @@ class Education extends Component {
                                 <input type="number" name="gpa" max="5"/>
                             </label>
                             <div className="submitBtnDiv">
-                                <button className="submitBtn" type="button" onClick={this.cancelBtnEducation}>CANCEL</button>
+                                <button className="submitBtn" type="button" onClick={cancelBtnEducation}>CANCEL</button>
                                 <button className="submitBtn">
                                     OK
                                 </button>
@@ -236,13 +235,11 @@ class Education extends Component {
                     <div className="topBorderLine"></div>
                     <p className="headers">Education</p>
                     <div className="borderLine"></div>
-                    {this.renderEducation()}
+                    {renderEducation()}
 
                 </div>
             </div>
-        )
-    }
+    )
 }
-
 
 export {Education}
